@@ -1,25 +1,27 @@
-import { useState, useEffect } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../firebase-config"
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-        // ...
-    })
-    .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-    });
+    const _handleSubmit = (event) => {
+        event.preventDefault();
+        function onRegister() {
+            signInWithEmailAndPassword(auth, email, password).catch((error) =>
+                console.log(error)
+            );
+            navigate("/");
+        }
+        onRegister();
+    };
 
     return (
         <div>
-            <form>
+            <form className="loginForm" onSubmit={_handleSubmit}>
                 <input
                     placeholder="Email..."
                     required
