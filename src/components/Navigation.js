@@ -4,9 +4,9 @@ import { auth } from "../firebase-config";
 // import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
 // import { doc, getDoc, collection, getDocs } from "firebase/firestore";
-import Cafe from "./Cafe";
-import Signup from "./Signup";
-import Login from "./Login";
+// import Cafes from "./cafes/Cafes";
+// import Signup from "./Signup";
+// import Login from "./Login";
 import { Navbar, Nav, NavDropdown, Container, Form, FormControl, Button } from "react-bootstrap"
 import { PersonSquare } from "react-bootstrap-icons";
 
@@ -62,8 +62,8 @@ function Navigation() {
                 placeholder="Search"
                 className="me-auto"
                 aria-label="Search"
+                // onChange={findCafes}
               />
-              <Button variant="outline-success">Search</Button>
             </Form>
             
             {/* </div> */}

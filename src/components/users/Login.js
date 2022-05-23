@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase-config";
+import { auth } from "../../firebase-config";
 import GoogleButton from 'react-google-button';
 
 function Login() {

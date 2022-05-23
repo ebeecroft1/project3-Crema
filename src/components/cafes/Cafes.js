@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from "react";
-import { auth, db } from "../firebase-config";
+import { auth, db } from "../../firebase-config";
 import { signOut } from "firebase/auth";
-import { AuthContext } from "./AuthProvider";
+import { AuthContext } from "../AuthProvider";
 import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
-function Cafe() {
+function Cafes() {
   // const { currentUser } = useContext(AuthContext);
 
   // const navigate = useNavigate();
@@ -48,4 +48,4 @@ function Cafe() {
   );
 }
 
-export default Cafe;
+export default Cafes;
