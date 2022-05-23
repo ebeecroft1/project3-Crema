@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,400&display=swap'); // Default font
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,700;1,400&display=swap'); // Brand font
+   
+$font-family-sans-serif: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+
+$theme-colors: (
+    "info": tomato,
+    "danger": teal,
+    "light": #F9ECCC
+);
+
+.navbar-brand {
+  font-size: 3em !important;
+  font-weight: bold;
+  font-family: 'Spectral', serif;
+}
+
+.App {
+    background-color: #FFFBFE;
+    text-align: center;
+};
+
+.navbar .nav-link {
+    color: #3C6E71;
+}
+
+@import "~bootstrap/scss/bootstrap";

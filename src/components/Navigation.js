@@ -30,7 +30,16 @@ function Navigation() {
 
     <Navbar bg="light" expand="lg">
         <Container>
-            <Navbar.Brand href="/">Crema</Navbar.Brand>
+            <Navbar.Brand href="/">
+              <img
+                alt="Crema Logo"
+                src="./coffeegrinder.svg"
+                width="30"
+                height="60"
+                className="d-inline-block align-top"
+              />{' '}
+              Crema
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
@@ -47,7 +56,7 @@ function Navigation() {
             { currentUser ? (
               <>
               <Nav.Link href="/" onClick={logout}>Logout</Nav.Link>
-              <h1>Welcome {auth.currentUser?.email}</h1>
+              <h4>Welcome {auth.currentUser?.email}</h4>
               </>
             ) : (
               <>

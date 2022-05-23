@@ -1,12 +1,13 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import '../App.css';
 import AuthProvider from "./AuthProvider";
 import Cafe from "./Cafe";
 import Login from "./Login";
 import Signup from "./Signup";
 import Navigation from "./Navigation";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.scss';
+// import './custom.scss';
 
 
 function App() {
