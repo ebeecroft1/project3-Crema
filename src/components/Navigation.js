@@ -8,6 +8,7 @@ import Cafe from "./Cafe";
 import Signup from "./Signup";
 import Login from "./Login";
 import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap"
+import { PersonSquare } from "react-bootstrap-icons";
 
 function Navigation() {
     const { currentUser } = useContext(AuthContext);
@@ -41,7 +42,7 @@ function Navigation() {
               Crema
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
+            <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
             <Nav className="me-auto">
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="#link">Link</Nav.Link>
@@ -55,8 +56,12 @@ function Navigation() {
             </Nav>
             { currentUser ? (
               <>
-              <Nav.Link href="/" onClick={logout}>Logout</Nav.Link>
-              <h4>Welcome {auth.currentUser?.email}</h4>
+              {/* ToDo - make PersonSquare Icon responsive */}
+              {/* <PersonSquare/>  */}
+              <NavDropdown title={auth.currentUser?.email} id="basic-nav-dropdown">
+                <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+                <NavDropdown.Item href="/" onClick={logout}>Logout</NavDropdown.Item>
+              </NavDropdown>
               </>
             ) : (
               <>
