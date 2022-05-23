@@ -7,7 +7,7 @@ import { AuthContext } from "./AuthProvider";
 import Cafe from "./Cafe";
 import Signup from "./Signup";
 import Login from "./Login";
-import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap"
+import { Navbar, Nav, NavDropdown, Container, Form, FormControl, Button } from "react-bootstrap"
 import { PersonSquare } from "react-bootstrap-icons";
 
 function Navigation() {
@@ -43,7 +43,7 @@ function Navigation() {
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-            <Nav className="me-auto">
+            {/* <Nav className="me-auto">
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="#link">Link</Nav.Link>
                 <NavDropdown title="Dropdown" id="basic-nav-dropdown">
@@ -53,7 +53,20 @@ function Navigation() {
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                 </NavDropdown>
-            </Nav>
+            </Nav> */}
+            {/* <div class="d-flex justify-content-start"> */}
+            
+            <Form className="d-flex me-auto">
+              <FormControl
+                type="search"
+                placeholder="Search"
+                className="me-auto"
+                aria-label="Search"
+              />
+              <Button variant="outline-success">Search</Button>
+            </Form>
+            
+            {/* </div> */}
             { currentUser ? (
               <>
               {/* ToDo - make PersonSquare Icon responsive */}
