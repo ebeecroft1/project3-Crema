@@ -1,10 +1,23 @@
 import React from "react";
+import { Button, Container, Form, FormControl, Image} from "react-bootstrap";
+import "./Home.scss"
+
 
 function Home() {
     return(
-        <div className="landing">
-            <img src="./landingcafe.jpeg" alt="Cafe background" />
-        </div>
+        <Container className="hero" fluid>
+            <Image src="./landingcafe.jpeg" alt="Cafe background" fluid/>
+            <div className="hero-overlay">
+                <Form>
+                    <FormControl
+                        type="search"
+                        placeholder="Search"
+                        aria-label="Search"
+                    />
+                    <Button variant="primary" type="submit">Search</Button>
+                </Form>
+            </div>
+        </Container>
     );
 }
 

@@ -42,7 +42,7 @@ function Navigation() {
               Crema
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+            <Navbar.Collapse id="basic-navbar-nav">
             {/* <Nav className="me-auto">
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="#link">Link</Nav.Link>
@@ -71,7 +71,7 @@ function Navigation() {
               <>
               {/* ToDo - make PersonSquare Icon responsive */}
               {/* <PersonSquare/>  */}
-              <NavDropdown title={auth.currentUser?.email} id="basic-nav-dropdown">
+              <NavDropdown title={auth.currentUser?.email} className="justify-content-end">
                 <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                 <NavDropdown.Item href="/" onClick={logout}>Logout</NavDropdown.Item>
               </NavDropdown>

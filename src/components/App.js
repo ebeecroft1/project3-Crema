@@ -7,8 +7,8 @@ import Signup from "./users/Signup";
 import Navigation from "./Navigation";
 import Profile from "./users/Profile";
 import Home from "./Home";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.scss';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.scss";
 
 
 function App() {
