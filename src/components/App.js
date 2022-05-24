@@ -7,6 +7,7 @@ import Signup from "./users/Signup";
 import Navigation from "./Navigation";
 import Profile from "./users/Profile";
 import Home from "./Home";
+import Map from "./Map";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
 
@@ -24,6 +25,7 @@ function App() {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/profile" element={<Profile />} />
+            <Route exact path="/map" element={<Map />} />
           </Routes>
         </BrowserRouter>
       </div>

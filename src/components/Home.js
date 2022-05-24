@@ -8,14 +8,15 @@ function Home() {
         <Container className="hero" fluid>
             <Image src="./landingcafe.jpeg" alt="Cafe background" fluid/>
             <div className="hero-overlay">
-                <Form>
+                {/* <Form>
                     <FormControl
                         type="search"
                         placeholder="Search"
                         aria-label="Search"
                     />
                     <Button variant="primary" type="submit">Search</Button>
-                </Form>
+                </Form> */}
+                <Button variant="primary">Coffee near me</Button>
             </div>
         </Container>
     );
