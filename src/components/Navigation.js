@@ -7,7 +7,7 @@ import { AuthContext } from "./AuthProvider";
 // import Cafes from "./cafes/Cafes";
 // import Signup from "./Signup";
 // import Login from "./Login";
-import { Navbar, Nav, NavDropdown, Container, Form, FormControl, Button } from "react-bootstrap"
+import { Navbar, Nav, NavDropdown, Container, Form, FormControl, Button } from "react-bootstrap";
 import { PersonSquare } from "react-bootstrap-icons";
 
 function Navigation() {

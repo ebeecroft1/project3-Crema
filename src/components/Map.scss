@@ -1,0 +1,12 @@
+.map-box {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    padding: 2%;
+}
+
+.search-box {
+    width: 300px;
+}
+
+@import "~bootstrap/scss/bootstrap";
