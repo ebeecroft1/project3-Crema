@@ -8,8 +8,8 @@ import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocom
 const libraries = ["places"];
 
 const mapContainerStyle = {
-    width: '60vw',
-    height: '50vh',
+    width: '80vw',
+    height: '40vh',
 };
 
 const center = {
@@ -69,7 +69,7 @@ function Map() {
 
             </GoogleMap>
         </Container>
-        <Container fluid>
+        <Container style={{width:"60vw"}}>
             <Search className="search-box" />
         </Container>
         </>
