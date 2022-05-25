@@ -1,6 +1,8 @@
-import React from "react";
-import { GoogleMap, LoadScript, useLoadScript } from "@react-google-maps/api";
-import {Container, Form, FormControl} from "react-bootstrap";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { doc, getDoc, collection, docs, getDocs, where } from "firebase/firestore";
+import { db } from "../firebase-config";
+import { GoogleMap, LoadScript, Marker, useLoadScript } from "@react-google-maps/api";
+import { Container } from "react-bootstrap";
 import Mapstyles from "./Mapstyles";
 import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocomplete";
 import {
@@ -37,16 +39,51 @@ function Map() {
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries, 
     });
+    const [cafes, setCafes] = useState([]); // TODO - see how to set this from the database
+    
+    const getCafes = async () => {
 
-    const mapRef = React.useRef();
-    const onMapLoad = React.useCallback((map) => {
+        // const cafesCollectionRef = collection(db, "cafes");
+        // const data = await getDocs(cafesCollectionRef);
+        // setCafes(data.docs.map((cafe) => ({ ...cafe.data(), id: cafe.id })));
+        // console.log(cafes);
+
+        const items = [];
+        try {
+            const querySnapshot = await getDocs(collection(db, "cafes"));
+            querySnapshot.forEach((doc) => {
+                items.push(doc.data());
+                console.log(doc.data());
+            })
+        } catch (error) {
+            console.log(error)
+        }
+        setCafes(items);
+
+        // const querySnapshot = await getDocs(collection(db, "cafes"));
+        // querySnapshot.forEach((doc) => {
+            // console.log(doc.data());
+            // allCafes.push(doc.data().geopoint.latitude);
+            // allCafes.push(doc.data().geopoint.longitude);
+        // });
+        console.log(cafes);
+
+    };
+
+    const mapRef = useRef();
+    const onMapLoad = useCallback((map) => {
         mapRef.current = map;
     }, []);
 
-    const panTo = React.useCallback(({lat, lng}) => {
+    const panTo = useCallback(({lat, lng}) => {
         mapRef.current.panTo({lat, lng});
-        mapRef.current.setZoom(14);
+        mapRef.current.setZoom(15);
     }, []);
+
+    // Load cafe markers onto map
+    useEffect(() => {
+		getCafes();
+	}, []);
 
     if (loadError) return "Error loading maps";
     if (!isLoaded) return "Loading maps";
@@ -61,17 +98,32 @@ function Map() {
                 options={options}
                 onLoad={onMapLoad}
             >
-
+            <Marker
+                position={{ lat: -33.8688, lng: 151.2093 }}
+            />
             </GoogleMap>
         </Container>
         <Container style={{width:"60vw"}}>
             <Search panTo={panTo}/>
+            <Locate panTo={panTo}/>
         </Container>
         </>
     )
 }
 
 export default Map;
+
+function Locate({panTo}) {
+    return <button onClick={() => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+            panTo({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            })
+        }, () => null, options)
+    }}>Use my location</button>
+};
 
 function Search({panTo}) {
     const {ready, value, suggestions: {status, data}, setValue, clearSuggestions} = usePlacesAutocomplete({
@@ -102,24 +154,12 @@ function Search({panTo}) {
         placeholder="Search"
     />
     <ComboboxPopover>
-        {status === "OK" && data.map(({id, description}) => (
-            <ComboboxOption key={id} value={description} />
-            ))}
+        <ComboboxList>
+            {status === "OK" && data.map(({id, description}) => (
+                <ComboboxOption key={id} value={description} />
+                ))}
+        </ComboboxList>
     </ComboboxPopover>
     </Combobox>
     )
-//     return <Form onSelect={(address) => {
-//         console.log(address);
-//     }} >
-//     <FormControl
-//       type="search"
-//       placeholder="Search"
-//     //   aria-label="Search"
-//       value={value}
-//       onChange={(e) => {
-//           setValue(e.target.value);
-//       }}
-//       disabled={!ready}
-//     />
-//   </Form>
 }
