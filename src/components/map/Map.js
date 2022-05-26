@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { doc, getDoc, collection, docs, getDocs, where } from "firebase/firestore";
-import { db } from "../firebase-config";
+import { db } from "../../firebase-config";
 import { GoogleMap, LoadScript, Marker, useLoadScript } from "@react-google-maps/api";
 import { Container } from "react-bootstrap";
 import Mapstyles from "./Mapstyles";
@@ -33,6 +33,12 @@ const options = {
     zoomControl: true,
 };
 
+const onLoad = marker => {
+    console.log('marker: ', marker)
+};
+
+
+
 
 function Map() {
     const {isLoaded, loadError} = useLoadScript({
@@ -40,34 +46,25 @@ function Map() {
         libraries, 
     });
     const [cafes, setCafes] = useState([]); // TODO - see how to set this from the database
+
+    const markerPosition = {
+        lat: -33.8459,
+        lng: 151.2118
+    };
     
     const getCafes = async () => {
-
-        // const cafesCollectionRef = collection(db, "cafes");
-        // const data = await getDocs(cafesCollectionRef);
-        // setCafes(data.docs.map((cafe) => ({ ...cafe.data(), id: cafe.id })));
-        // console.log(cafes);
-
         const items = [];
         try {
             const querySnapshot = await getDocs(collection(db, "cafes"));
             querySnapshot.forEach((doc) => {
                 items.push(doc.data());
-                console.log(doc.data());
+                // console.log(doc.data());
             })
         } catch (error) {
             console.log(error)
         }
+        // console.log(items);
         setCafes(items);
-
-        // const querySnapshot = await getDocs(collection(db, "cafes"));
-        // querySnapshot.forEach((doc) => {
-            // console.log(doc.data());
-            // allCafes.push(doc.data().geopoint.latitude);
-            // allCafes.push(doc.data().geopoint.longitude);
-        // });
-        console.log(cafes);
-
     };
 
     const mapRef = useRef();
@@ -94,19 +91,30 @@ function Map() {
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
                 zoom={15}
-                center={center}
+                center={markerPosition}
                 options={options}
                 onLoad={onMapLoad}
             >
-            <Marker
-                position={{ lat: -33.8688, lng: 151.2093 }}
-            />
+                <Marker position={markerPosition} />
             </GoogleMap>
         </Container>
+
         <Container style={{width:"60vw"}}>
             <Search panTo={panTo}/>
             <Locate panTo={panTo}/>
         </Container>
+
+        { cafes ? (
+            <div>{cafes.map((cafe) => (
+                <div>
+                <h1>{cafe.name}</h1>
+                <h2>{cafe.address}</h2>
+                <p>{cafe.geopoint._lat}</p>
+                <p>{cafe.geopoint._long}</p>
+                </div>
+            ))}
+            </div>
+        ) : <></>}
         </>
     )
 }

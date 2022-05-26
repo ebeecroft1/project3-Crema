@@ -33,6 +33,15 @@ export default [
         ]
     },
     {
+        "featureType": "poi",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
         "featureType": "road",
         "elementType": "geometry.fill",
         "stylers": [
