@@ -33,24 +33,12 @@ const options = {
     zoomControl: true,
 };
 
-const onLoad = marker => {
-    console.log('marker: ', marker)
-};
-
-
-
-
 function Map() {
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries, 
     });
     const [cafes, setCafes] = useState([]); // TODO - see how to set this from the database
-
-    const markerPosition = {
-        lat: -33.8459,
-        lng: 151.2118
-    };
     
     const getCafes = async () => {
         const items = [];
@@ -91,11 +79,21 @@ function Map() {
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
                 zoom={15}
-                center={markerPosition}
+                center={center}
                 options={options}
                 onLoad={onMapLoad}
             >
-                <Marker position={markerPosition} />
+                
+            {cafes.map((cafe) => (
+                <Marker
+                key={Math.random()}
+                position={{
+                    lat: cafe.geopoint._lat,
+                    lng: cafe.geopoint._long
+                }}
+                />
+            ))}
+
             </GoogleMap>
         </Container>
 

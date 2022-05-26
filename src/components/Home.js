@@ -16,7 +16,7 @@ function Home() {
                     />
                     <Button variant="primary" type="submit">Search</Button>
                 </Form> */}
-                <Button variant="primary">Coffee near me</Button>
+                <Button href="/map" variant="primary">Coffee near me</Button>
             </div>
         </Container>
     );
