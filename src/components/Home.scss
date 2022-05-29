@@ -1,12 +1,15 @@
 .hero {
     position: relative;
     z-index: 1;
+    padding: 0;
 }
 
 .hero-overlay {
-    // position: absolute;
     z-index: 3;
-    // color: #FFFBFE;
+    position: absolute;
+    top: 31%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 @import "~bootstrap/scss/bootstrap";

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { doc, getDoc, collection, docs, getDocs, where } from "firebase/firestore";
 import { db } from "../../firebase-config";
 import { GoogleMap, LoadScript, Marker, useLoadScript } from "@react-google-maps/api";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import Mapstyles from "./Mapstyles";
 import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocomplete";
 import {
@@ -100,9 +100,10 @@ function Map() {
         <Container style={{width:"60vw"}}>
             <Search panTo={panTo}/>
             <Locate panTo={panTo}/>
+            <Button variant="primary" style={{color: "#FFFBFE"}}>Add new cafe</Button>
         </Container>
 
-        { cafes ? (
+        {/* { cafes ? (
             <div>{cafes.map((cafe) => (
                 <div>
                 <h1>{cafe.name}</h1>
@@ -112,7 +113,7 @@ function Map() {
                 </div>
             ))}
             </div>
-        ) : <></>}
+        ) : <></>} */}
         </>
     )
 }
@@ -120,7 +121,7 @@ function Map() {
 export default Map;
 
 function Locate({panTo}) {
-    return <button onClick={() => {
+    return <Button variant="primary" style={{color: "#FFFBFE", margin: "1em"}} onClick={() => {
         navigator.geolocation.getCurrentPosition(
             (position) => {
             panTo({
@@ -128,7 +129,7 @@ function Locate({panTo}) {
                 lng: position.coords.longitude
             })
         }, () => null, options)
-    }}>Use my location</button>
+    }}>Use my location</Button>
 };
 
 function Search({panTo}) {

@@ -42,19 +42,7 @@ function Navigation() {
               Crema
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-            {/* <Nav className="me-auto">
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="#link">Link</Nav.Link>
-                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                </NavDropdown>
-            </Nav> */}
-            {/* <div class="d-flex justify-content-start"> */}
+            <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center">
             
             <Form className="d-flex me-auto">
               <FormControl
@@ -66,23 +54,23 @@ function Navigation() {
               />
             </Form>
             
-            {/* </div> */}
-            { currentUser ? (
-              <>
-              {/* ToDo - make PersonSquare Icon responsive */}
-              {/* <PersonSquare/>  */}
-              <NavDropdown title={auth.currentUser?.email} className="justify-content-end">
-                <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-                <NavDropdown.Item href="/" onClick={logout}>Logout</NavDropdown.Item>
-              </NavDropdown>
-              </>
-            ) : (
-              <>
-                <Nav.Link href="/login">Login</Nav.Link>
-                <Nav.Link href="/signup">Signup</Nav.Link>
-              </>
-            )}
-            
+            <Nav className="ms-auto">
+              { currentUser ? (
+                <>
+                {/* ToDo - make PersonSquare Icon responsive */}
+                {/* <PersonSquare/>  */}
+                <NavDropdown title={auth.currentUser?.email}>
+                  <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+                  <NavDropdown.Item href="/" onClick={logout}>Logout</NavDropdown.Item>
+                </NavDropdown>
+                </>
+              ) : (
+                <>
+                  <Nav.Link href="/login">Login</Nav.Link>
+                  <Nav.Link href="/signup">Signup</Nav.Link>
+                </>
+              )}
+            </Nav>
             </Navbar.Collapse>
         </Container>
     </Navbar>
