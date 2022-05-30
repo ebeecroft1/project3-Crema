@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { doc, getDoc, collection, docs, getDocs, where } from "firebase/firestore";
 import { db } from "../../firebase-config";
-import { GoogleMap, LoadScript, Marker, useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, InfoWindow, LoadScript, Marker, useLoadScript } from "@react-google-maps/api";
 import { Button, Container } from "react-bootstrap";
 import Mapstyles from "./Mapstyles";
 import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocomplete";
@@ -39,6 +39,7 @@ function Map() {
         libraries, 
     });
     const [cafes, setCafes] = useState([]); // TODO - see how to set this from the database
+    const [selected, setSelected] = useState(null);
     
     const getCafes = async () => {
         const items = [];
@@ -91,8 +92,30 @@ function Map() {
                     lat: cafe.geopoint._lat,
                     lng: cafe.geopoint._long
                 }}
+                onClick = {() => {
+                    setSelected(cafe);
+                }}
+                icon = {{
+                    url: './coffeeicon.png',
+                    origin: new window.google.maps.Point(0, 0),
+                    anchor: new window.google.maps.Point(15, 15),
+                    scaledSize: new window.google.maps.Size(25, 30),
+                }}
                 />
             ))}
+
+            { selected ? (
+                <InfoWindow
+                    position={{ lat: selected.geopoint._lat, lng: selected.geopoint._long }}
+                    onCloseClick={() => {
+                        setSelected(null);
+                    }}
+                >
+                <div>
+                    <h6>{selected.name}</h6>
+                    <p>{selected.address}</p>
+                </div>
+            </InfoWindow>) : null}
 
             </GoogleMap>
         </Container>
