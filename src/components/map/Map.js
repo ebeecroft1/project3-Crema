@@ -38,7 +38,7 @@ function Map() {
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries, 
     });
-    const [cafes, setCafes] = useState([]); // TODO - see how to set this from the database
+    const [cafes, setCafes] = useState([]);
     const [selected, setSelected] = useState(null);
     
     const getCafes = async () => {

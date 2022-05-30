@@ -34,7 +34,7 @@ function Navigation() {
             <Navbar.Brand href="/">
               <img
                 alt="Crema Logo"
-                src="./coffeegrinder.svg"
+                src="/coffeegrinder.svg"
                 width="30"
                 height="60"
                 className="d-inline-block align-top"
