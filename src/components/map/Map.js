@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { doc, getDoc, collection, docs, getDocs, where } from "firebase/firestore";
 import { db } from "../../firebase-config";
 import { GoogleMap, InfoWindow, LoadScript, Marker, useLoadScript } from "@react-google-maps/api";
-import { Button, Container } from "react-bootstrap";
+import { Button, Container, Nav } from "react-bootstrap";
 import Mapstyles from "./Mapstyles";
 import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocomplete";
 import {
@@ -12,8 +12,8 @@ import {
     ComboboxList,
     ComboboxOption,
   } from "@reach/combobox";
-  import "@reach/combobox/styles.css"
-  import "./Map.scss";
+import "@reach/combobox/styles.css"
+import "./Map.scss";
 
 const libraries = ["places"];
 
@@ -46,14 +46,14 @@ function Map() {
         try {
             const querySnapshot = await getDocs(collection(db, "cafes"));
             querySnapshot.forEach((doc) => {
-                items.push(doc.data());
-                // console.log(doc.data());
+                items.push({...doc.data(), id: doc.id}); // Push each cafe data including ID into Items array
+                // console.log({...doc.data(), id: doc.id});
             })
         } catch (error) {
             console.log(error)
         }
         // console.log(items);
-        setCafes(items);
+        setCafes(items); // Set cafes to equal the objects in Items array
     };
 
     const mapRef = useRef();
@@ -87,7 +87,7 @@ function Map() {
                 
             {cafes.map((cafe) => (
                 <Marker
-                key={Math.random()}
+                key={cafe.id}
                 position={{
                     lat: cafe.geopoint._lat,
                     lng: cafe.geopoint._long
@@ -112,7 +112,8 @@ function Map() {
                     }}
                 >
                 <div>
-                    <h6>{selected.name}</h6>
+                    <Nav.Link href={`/cafe/${selected.id}`}>{selected.name}</Nav.Link>
+                    {/* <h6>{selected.name}</h6> */}
                     <p>{selected.address}</p>
                 </div>
             </InfoWindow>) : null}

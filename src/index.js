@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <React.StrictMode>
+  // <React.StrictMode> // Commented out as it was causing code to run twice
     <App />
   // </React.StrictMode>
 );
