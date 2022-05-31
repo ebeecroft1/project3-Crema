@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Col, Container, Form, Image, Row } from "react-bootstrap";
 import { db, storage } from "../../firebase-config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, doc, addDoc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { v4 } from "uuid"; // Generate random image ID
 import axios from "axios"; // For fetching address geocode from Google Maps
@@ -16,13 +16,13 @@ function CafeNew() {
     const [lat, setLat] = useState("");
     const [lng, setLng] = useState("");
 
-    const uploadImage = () => {
-        if (imageUpload == null) return;
-        const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
-        uploadBytes(imageRef, imageUpload).then(() => {
-            alert("Image uploaded");
-        })
-    };
+    // const uploadImage = () => {
+    //     if (imageUpload == null) return;
+    //     const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
+    //     uploadBytes(imageRef, imageUpload).then(() => {
+    //         alert("Image uploaded");
+    //     })
+    // };
 
     const getGeocode = () => {
         axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
@@ -32,10 +32,10 @@ function CafeNew() {
             }
         })
         .then(function(response) {
-            console.log(response);
-            console.log(response.data.results[0].geometry.location.lat);
+            // console.log(response);
+            // console.log(response.data.results[0].geometry.location.lat);
             setLat(response.data.results[0].geometry.location.lat);
-            console.log(response.data.results[0].geometry.location.lng);
+            // console.log(response.data.results[0].geometry.location.lng);
             setLng(response.data.results[0].geometry.location.lng);
         })
     };
@@ -49,9 +49,21 @@ function CafeNew() {
             address: address,
             latitude: lat,
             longitude: lng,
-            // imagesURL
+            imageURL: []
         });
-        navigate(`/map`)
+        if (imageUpload !== null) {
+            const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
+            uploadBytes(imageRef, imageUpload).then(async () => {
+                const downloadURL = await getDownloadURL(imageRef);
+                await updateDoc(doc(db, "cafes", cafeRef.id), {
+                    imageURL: downloadURL,
+                });
+                alert("Cafe created");
+                navigate(`/map`);
+            });
+        } else {
+            navigate(`/map`)
+        };
     };
 
     return (
@@ -90,13 +102,12 @@ function CafeNew() {
                             onBlur={getGeocode}
                         />
                     </Col>
-                    {/* <Button onClick={getGeocode}>Geocode test</Button> */}
                 </Form.Group>
 
-                <Form.Group as={Row} className="mb-3" controlId="formHorizontalFile">
+                <Form.Group as={Row} className="mb-3" controlId="formHorizontalFileMultiple">
                     <Form.Label column sm={2}>Images</Form.Label>
                     <Col sm={10}>
-                        <Form.Control type="file" onChange={(event) => {setImageUpload(event.target.files[0])}}/>
+                        <Form.Control type="file" multiple onChange={(event) => {setImageUpload(event.target.files[0])}}/>
                     </Col>
                 </Form.Group>
                 <Button variant="primary" style={{color: "#FFFBFE"}} type="button" onClick={createCafe}>

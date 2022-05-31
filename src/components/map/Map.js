@@ -130,18 +130,6 @@ function Map() {
             <Locate panTo={panTo}/>
             <Button href="/cafe/new" variant="primary" style={{color: "#FFFBFE"}}>Add new cafe</Button>
         </Container>
-
-        {/* { cafes ? (
-            <div>{cafes.map((cafe) => (
-                <div>
-                <h1>{cafe.name}</h1>
-                <h2>{cafe.address}</h2>
-                <p>{cafe.geopoint._lat}</p>
-                <p>{cafe.geopoint._long}</p>
-                </div>
-            ))}
-            </div>
-        ) : <></>} */}
         </>
     )
 }
