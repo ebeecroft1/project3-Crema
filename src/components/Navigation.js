@@ -15,7 +15,7 @@ function Navigation() {
   return (
 
     <Navbar bg="light" expand="lg">
-        <Container>
+        <Container fluid>
             <Navbar.Brand href="/">
               <img
                 alt="Crema Logo"
