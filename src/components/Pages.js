@@ -5,6 +5,7 @@ import Home from "./Home";
 import Map from "./map/Map";
 import Cafes from "./cafes/Cafes";
 import CafeShow from "./cafes/CafeShow";
+import CafeNew from "./cafes/CafeNew";
 import Login from "./users/Login";
 import Signup from "./users/Signup";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -22,6 +23,7 @@ function Pages() {
             <Route exact path="/profile" element={<Profile />} />
             <Route exact path="/map" element={<Map />} />
             <Route exact path="/cafe/:id" element={<CafeShow />} />
+            <Route exact path="/cafe/new" element={<CafeNew />} />
         </Routes>
         </div>
     );

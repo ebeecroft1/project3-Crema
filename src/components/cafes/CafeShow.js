@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {useParams} from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../firebase-config"
+import { db } from "../../firebase-config";
 import {Nav} from "react-bootstrap";
 
 function CafeShow() {
@@ -34,8 +34,6 @@ function CafeShow() {
                 <div>
                     <h1>{cafeInfo.name}</h1>
                     <h2>{cafeInfo.address}</h2>
-                    <p>{cafeInfo.geopoint._lat}</p>
-                    <p>{cafeInfo.geopoint._long}</p>
                 </div>
             ) }
             <Nav.Link href="/map">Back</Nav.Link>

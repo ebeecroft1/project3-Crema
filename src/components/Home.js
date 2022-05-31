@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Container, Form, FormControl, Image} from "react-bootstrap";
-import "./Home.scss"
+import "./Home.scss";
 
 
 function Home() {

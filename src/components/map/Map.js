@@ -124,7 +124,7 @@ function Map() {
         <Container style={{width:"60vw"}}>
             <Search panTo={panTo}/>
             <Locate panTo={panTo}/>
-            <Button variant="primary" style={{color: "#FFFBFE"}}>Add new cafe</Button>
+            <Button href="/cafe/new" variant="primary" style={{color: "#FFFBFE"}}>Add new cafe</Button>
         </Container>
 
         {/* { cafes ? (
