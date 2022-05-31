@@ -5,12 +5,12 @@ import "./Home.scss";
 
 function Home() {
     return(
-        <Container className="hero" fluid>
+        <div className="hero" >
             <Image src="./landingcafe.jpeg" alt="Cafe background" fluid/>
             <div className="hero-overlay">
-                <Button href="/map" variant="primary" size="lg" style={{color: "#FFFBFE"}}>Coffee near me</Button>
+                <Button href="/map" variant="primary" style={{color: "#FFFBFE"}}>Coffee near me</Button>
             </div>
-        </Container>
+        </div>
     );
 }
 

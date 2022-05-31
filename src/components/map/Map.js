@@ -89,8 +89,10 @@ function Map() {
                 <Marker
                 key={cafe.id}
                 position={{
-                    lat: cafe.geopoint._lat,
-                    lng: cafe.geopoint._long
+                    // lat: cafe.geopoint._lat,
+                    lat: cafe.latitude,
+                    // lng: cafe.geopoint._long
+                    lng: cafe.longitude
                 }}
                 onClick = {() => {
                     setSelected(cafe);
