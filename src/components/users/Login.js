@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { Button, Col, Container, Form, Stack } from "react-bootstrap";
 import { auth } from "../../firebase-config";
 import GoogleButton from 'react-google-button';
 
@@ -44,29 +45,60 @@ function Login() {
     };
 
     return (
-        <div>
-            <form className="loginForm" onSubmit={_handleSubmit}>
-                <input
-                    placeholder="Email..."
-                    required
-                    onChange={(event) => {
-                        setEmail(event.target.value);
+        <Container fluid>
+            <Form>
+                <Form.Group className="m-3" controlId="formGroupEmail">
+                    <Form.Control
+                        type="email"
+                        placeholder="coffee@gmail.com"
+                        className="shadow-none"
+                        required
+                        style={{
+                            maxWidth: "500px"
+                        }}
+                        onChange={(event) => {
+                            setEmail(event.target.value);
+                        }}
+                    />
+                </Form.Group>
+                <Form.Group className="m-3" controlId="formGroupPassword">
+                    <Form.Control
+                        type="password"
+                        placeholder="Password"
+                        className="shadow-none"
+                        required
+                        style={{
+                            maxWidth: "500px"
+                        }}
+                        onChange={(event) => {
+                            setPassword(event.target.value);
+                        }}
+                    />
+                </Form.Group>
+                
+                <Button
+                    variant="primary"
+                    style={{
+                        color: "#FFFBFE",
+                        width: "240px",
+                        height: "50px"
+                    }}
+                    type="button"
+                    onClick={_handleSubmit}
+                >
+                    Login
+                </Button>
+                
+                <GoogleButton
+                    onClick={signInWithGoogle}
+                    content="Sign in with google"
+                    style={{
+                        margin: "0 auto",
+                        marginTop: "1em"
                     }}
                 />
-                <input
-                    placeholder="Password..."
-                    required
-                    onChange={(event) => {
-                        setPassword(event.target.value);
-                    }}
-                />
-                <button>Login</button>
-            </form>
-            <GoogleButton
-                onClick={signInWithGoogle}
-                content="Sign in with google"
-            />
-        </div>
+            </Form>
+        </Container>
     );
 
 }   

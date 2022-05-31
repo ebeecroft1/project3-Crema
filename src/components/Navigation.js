@@ -48,7 +48,7 @@ function Navigation() {
               <FormControl
                 type="search"
                 placeholder="Search"
-                className="me-auto"
+                className="me-auto shadow-none"
                 aria-label="Search"
                 // onChange={findCafes}
               />

@@ -115,7 +115,7 @@ function Map() {
                 >
                 <div>
                     <Nav.Link href={`/cafe/${selected.id}`}>{selected.name}</Nav.Link>
-                    { selected.imageURL ? (
+                    { selected.imageURL.length > 0 ? (
                         <img src={selected.imageURL} alt={selected.name} style={{height: "120px"}} />
                     ) : null }
                     <p>{selected.address}</p>

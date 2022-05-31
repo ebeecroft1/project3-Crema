@@ -1,5 +1,3 @@
-// TODO: Fix background color beneath the navbar
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,400&display=swap'); // Default font
 @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,700;1,400&display=swap'); // Brand font
 
@@ -17,17 +15,11 @@ $theme-colors: (
 }
 
 .App {
-    background-color: #FFFBFE;
     text-align: center;
 };
 
 .navbar .nav-link {
     color: #3C6E71;
 }
-
-// TODO
-// .landing {
-//     background-image: 
-// }
 
 @import "~bootstrap/scss/bootstrap";

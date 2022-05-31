@@ -12,6 +12,7 @@ function CafeNew() {
 
     const [name, setName] = useState("");
     const [address, setAddress] = useState("");
+    const [beans, setBeans] = useState("");
     const [imageUpload, setImageUpload] = useState(null);
     const [lat, setLat] = useState("");
     const [lng, setLng] = useState("");
@@ -69,7 +70,7 @@ function CafeNew() {
     return (
         <>
         <Image src="/cafemural.jpeg" alt="Cafe mural" fluid/>
-        <Container fluid>
+        <Container style={{marginBottom: "2em"}} fluid>
             
             <h1 style={{color: "#B87D4B", paddingTop: "10px"}}>
                 Add New Cafe
@@ -80,6 +81,7 @@ function CafeNew() {
                     <Col sm={10}>
                         <Form.Control
                             required
+                            className="shadow-none"
                             type="text"
                             placeholder="Cafe name"
                             onChange={(event) => {
@@ -94,6 +96,7 @@ function CafeNew() {
                     <Col sm={10}>
                         <Form.Control
                             required
+                            className="shadow-none"
                             type="text"
                             placeholder="Address"
                             onChange={(event) => {
@@ -104,10 +107,29 @@ function CafeNew() {
                     </Col>
                 </Form.Group>
 
-                <Form.Group as={Row} className="mb-3" controlId="formHorizontalFileMultiple">
-                    <Form.Label column sm={2}>Images</Form.Label>
+                <Form.Group as={Row} className="mb-3" controlId="formHorizontalText">
+                    <Form.Label column sm={2}>Coffee Served</Form.Label>
                     <Col sm={10}>
-                        <Form.Control type="file" multiple onChange={(event) => {setImageUpload(event.target.files[0])}}/>
+                        <Form.Control
+                            className="shadow-none"
+                            type="text"
+                            placeholder="Campos Coffee"
+                            onChange={(event) => {
+                                setBeans(event.target.value);
+                            }}
+                        />
+                    </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="mb-3" controlId="formHorizontalFileMultiple">
+                    <Form.Label column sm={2}>Image</Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            className="shadow-none"
+                            type="file"
+                            multiple
+                            onChange={(event) => {setImageUpload(event.target.files[0])}}
+                        />
                     </Col>
                 </Form.Group>
                 <Button variant="primary" style={{color: "#FFFBFE"}} type="button" onClick={createCafe}>
