@@ -13,8 +13,8 @@ function CafeNew() {
     const [name, setName] = useState("");
     const [address, setAddress] = useState("");
     const [imageUpload, setImageUpload] = useState(null);
-    const [lat, setLat] = useState(0);
-    const [lng, setLng] = useState(0);
+    const [lat, setLat] = useState("");
+    const [lng, setLng] = useState("");
 
     const uploadImage = () => {
         if (imageUpload == null) return;

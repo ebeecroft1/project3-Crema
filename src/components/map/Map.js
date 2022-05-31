@@ -108,14 +108,16 @@ function Map() {
 
             { selected ? (
                 <InfoWindow
-                    position={{ lat: selected.geopoint._lat, lng: selected.geopoint._long }}
+                    position={{ lat: selected.latitude, lng: selected.longitude }}
                     onCloseClick={() => {
                         setSelected(null);
                     }}
                 >
                 <div>
                     <Nav.Link href={`/cafe/${selected.id}`}>{selected.name}</Nav.Link>
-                    {/* <h6>{selected.name}</h6> */}
+                    { selected.imageURL ? (
+                        <img src={selected.imageURL} alt={selected.name} style={{height: "120px"}} />
+                    ) : null }
                     <p>{selected.address}</p>
                 </div>
             </InfoWindow>) : null}
