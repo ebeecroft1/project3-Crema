@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { doc, getDoc, collection, docs, getDocs, where } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase-config";
 import { GoogleMap, InfoWindow, LoadScript, Marker, useLoadScript } from "@react-google-maps/api";
 import { Button, Container, Nav } from "react-bootstrap";
@@ -47,12 +47,10 @@ function Map() {
             const querySnapshot = await getDocs(collection(db, "cafes"));
             querySnapshot.forEach((doc) => {
                 items.push({...doc.data(), id: doc.id}); // Push each cafe data including ID into Items array
-                // console.log({...doc.data(), id: doc.id});
             })
         } catch (error) {
             console.log(error)
         }
-        // console.log(items);
         setCafes(items); // Set cafes to equal the objects in Items array
     };
 
@@ -89,9 +87,7 @@ function Map() {
                 <Marker
                 key={cafe.id}
                 position={{
-                    // lat: cafe.geopoint._lat,
                     lat: cafe.latitude,
-                    // lng: cafe.geopoint._long
                     lng: cafe.longitude
                 }}
                 onClick = {() => {
@@ -157,32 +153,34 @@ function Search({panTo}) {
     });
 
     return (
-    <Combobox onSelect={async (address) => {
-        setValue(address, false); // Update state to place chosen address in state - prevents requesting from Google Maps Places API again
-        clearSuggestions(); // Clear suggestions
+        <Combobox onSelect={async (address) => {
+            setValue(address, false); // Update state to place chosen address in state - prevents requesting from Google Maps Places API again
+            clearSuggestions(); // Clear suggestions
 
-        try {
-            const results = await getGeocode({address}); // Get Geocode of selected address
-            const {lat, lng} = await getLatLng(results[0]); // Extract lat and long
-            panTo({lat, lng}); // Pan map to selected lat and long
-        } catch(error) {
-            console.log("error!")
-        }
-        }}
-    >
-        <ComboboxInput value={value} onChange={(e) => {
-            setValue(e.target.value);
-        }}
-        disabled={!ready}
-        placeholder="Search"
-    />
-    <ComboboxPopover>
-        <ComboboxList>
-            {status === "OK" && data.map(({id, description}) => (
-                <ComboboxOption key={id} value={description} />
-                ))}
-        </ComboboxList>
-    </ComboboxPopover>
-    </Combobox>
+            try {
+                const results = await getGeocode({address}); // Get Geocode of selected address
+                const {lat, lng} = await getLatLng(results[0]); // Extract lat and long
+                panTo({lat, lng}); // Pan map to selected lat and long
+            } catch(error) {
+                console.log("error!")
+            }
+            }}
+        >
+            <ComboboxInput
+                value={value}
+                onChange={(e) => {
+                    setValue(e.target.value);
+                }}
+                disabled={!ready}
+                placeholder="Search"
+            />
+            <ComboboxPopover>
+                <ComboboxList>
+                    {status === "OK" && data.map(({id, description}) => (
+                        <ComboboxOption key={id} value={description} />
+                        ))}
+                </ComboboxList>
+            </ComboboxPopover>
+        </Combobox>
     )
 }

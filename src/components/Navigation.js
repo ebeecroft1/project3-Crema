@@ -1,12 +1,6 @@
 import React, { useContext } from "react";
 import { auth } from "../firebase-config";
-// import { signOut } from "firebase/auth";
-// import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
-// import { doc, getDoc, collection, getDocs } from "firebase/firestore";
-// import Cafes from "./cafes/Cafes";
-// import Signup from "./Signup";
-// import Login from "./Login";
 import { Navbar, Nav, NavDropdown, Container, Form, FormControl, Button } from "react-bootstrap";
 import { PersonSquare } from "react-bootstrap-icons";
 
@@ -17,15 +11,6 @@ function Navigation() {
     const logout = async () => {
       await auth.signOut();
     };
-    // const navigate = useNavigate();
-
-    // const clickLogin = () => {
-    //     if (currentUser) {
-    //         signOut(auth);
-    //     } else {
-    //         navigate("/login");
-    //     }
-    // };
 
   return (
 
@@ -57,8 +42,6 @@ function Navigation() {
             <Nav className="ms-auto">
               { currentUser ? (
                 <>
-                {/* ToDo - make PersonSquare Icon responsive */}
-                {/* <PersonSquare/>  */}
                 <NavDropdown title={auth.currentUser?.email}>
                   <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                   <NavDropdown.Item href="/" onClick={logout}>Logout</NavDropdown.Item>

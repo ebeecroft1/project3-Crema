@@ -1,22 +1,8 @@
-import { useState, useEffect, useContext } from "react";
-import { auth, db } from "../../firebase-config";
-import { signOut } from "firebase/auth";
-import { AuthContext } from "../AuthProvider";
-import { doc, getDoc, collection, getDocs } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { db } from "../../firebase-config";
+import { collection, getDocs } from "firebase/firestore";
 
 function Cafes() {
-  // const { currentUser } = useContext(AuthContext);
-
-  // const navigate = useNavigate();
-
-  // const clickLogin = () => {
-  //   if (currentUser) {
-  //     signOut(auth);
-  //   } else {
-  //     navigate("/login");
-  //   }
-  // };
 
   const [cafes, setCafes] = useState([]);
   const cafesCollectionRef = collection(db, "cafes");
@@ -32,10 +18,6 @@ function Cafes() {
 
   return (
     <div className="App">
-      {/* <h1>Welcome {auth.currentUser?.email}</h1>
-      <button onClick={clickLogin}>
-        {currentUser ? "Log Out" : "Login"}
-      </button> */}
       { cafes.map((cafe) => {
         return (
           <div>

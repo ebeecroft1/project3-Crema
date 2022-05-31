@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button, Col, Container, Form, Image, Row } from "react-bootstrap";
 import { db, storage } from "../../firebase-config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -13,17 +13,10 @@ function CafeNew() {
     const [name, setName] = useState("");
     const [address, setAddress] = useState("");
     const [beans, setBeans] = useState("");
+    const [recOrder, setRecOrder] = useState("");
     const [imageUpload, setImageUpload] = useState(null);
     const [lat, setLat] = useState("");
     const [lng, setLng] = useState("");
-
-    // const uploadImage = () => {
-    //     if (imageUpload == null) return;
-    //     const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
-    //     uploadBytes(imageRef, imageUpload).then(() => {
-    //         alert("Image uploaded");
-    //     })
-    // };
 
     const getGeocode = () => {
         axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
@@ -33,10 +26,7 @@ function CafeNew() {
             }
         })
         .then(function(response) {
-            // console.log(response);
-            // console.log(response.data.results[0].geometry.location.lat);
             setLat(response.data.results[0].geometry.location.lat);
-            // console.log(response.data.results[0].geometry.location.lng);
             setLng(response.data.results[0].geometry.location.lng);
         })
     };
@@ -50,6 +40,8 @@ function CafeNew() {
             address: address,
             latitude: lat,
             longitude: lng,
+            beans: beans,
+            recOrder: recOrder,
             imageURL: []
         });
         if (imageUpload !== null) {
@@ -116,6 +108,20 @@ function CafeNew() {
                             placeholder="Campos Coffee"
                             onChange={(event) => {
                                 setBeans(event.target.value);
+                            }}
+                        />
+                    </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="mb-3" controlId="formHorizontalText">
+                    <Form.Label column sm={2}>Best to Order</Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            className="shadow-none"
+                            type="text"
+                            placeholder="Flat White"
+                            onChange={(event) => {
+                                setRecOrder(event.target.value);
                             }}
                         />
                     </Col>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { Button, Col, Container, Form, Stack } from "react-bootstrap";
+import { Button, Container, Form } from "react-bootstrap";
 import { auth } from "../../firebase-config";
 import GoogleButton from 'react-google-button';
 
@@ -50,7 +50,7 @@ function Login() {
                 <Form.Group className="m-3" controlId="formGroupEmail">
                     <Form.Control
                         type="email"
-                        placeholder="coffee@gmail.com"
+                        placeholder="coffee@ga.co"
                         className="shadow-none"
                         required
                         style={{
