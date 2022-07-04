@@ -4,7 +4,7 @@
 
 [Crema](https://crema-7a519.web.app/) is a cafe search website utilizing Google Maps API.
 
-## Technologies
+## Tech Stack
 
 - React
 - Firebase Authentication
