@@ -13,6 +13,7 @@
 - React-Bootstrap
 - Sass
 - Reach (Combobox)
+- Netlify
 
 ---
 
